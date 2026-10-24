@@ -179,6 +179,9 @@ const th = {
     colSum: "รวม ",
     total: "รวมทั้งสิ้น {amount} บาท",
     notes: "หมายเหตุ : ",
+    signatureCustomer: "ผู้รับบริการ / ลูกค้า",
+    signatureAuthorized: "ผู้มีอำนาจลงนาม",
+    signatureDate: "วันที่",
   },
   services: {
     shockSwing: "เปลี่ยนโช๊คบานสวิง",
@@ -356,6 +359,9 @@ const en: typeof th = {
     colSum: "Total ",
     total: "Grand total {amount} THB",
     notes: "Notes: ",
+    signatureCustomer: "Customer",
+    signatureAuthorized: "Authorized signatory",
+    signatureDate: "Date",
   },
   services: {
     shockSwing: "Replace swing-door shock",

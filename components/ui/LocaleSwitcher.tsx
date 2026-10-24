@@ -159,7 +159,7 @@ export function LocaleSwitcherMobile() {
 
   return (
     <div
-      className="flex rounded-full border border-[rgba(120,140,180,0.18)] bg-white/50 p-0.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]"
+      className="flex rounded-full border border-[rgba(120,140,180,0.28)] bg-white p-0.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]"
       role="group"
       aria-label={t("locale.choose")}
     >
@@ -170,7 +170,7 @@ export function LocaleSwitcherMobile() {
             key={code}
             type="button"
             onClick={() => setLocale(code)}
-            className={`relative min-w-[2.75rem] rounded-full px-3 py-1.5 text-xs font-bold transition duration-300 ${
+            className={`relative min-w-[2.25rem] rounded-full px-2 py-1 text-[0.6875rem] font-bold transition duration-300 ${
               active
                 ? "text-white shadow-[0_3px_10px_rgba(0,122,255,0.35)]"
                 : "text-[var(--text-secondary)]"

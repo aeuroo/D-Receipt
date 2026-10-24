@@ -2,6 +2,7 @@
 
 import {
   Document,
+  Image,
   Page,
   StyleSheet,
   Text,
@@ -163,6 +164,48 @@ const styles = StyleSheet.create({
     color: "#52525b",
     marginRight: 8,
   },
+  signatureSection: {
+    marginTop: 20,
+    width: "100%",
+    alignItems: "flex-end",
+  },
+  signatureBlock: {
+    width: 156,
+    alignItems: "center",
+  },
+  signatureSlot: {
+    height: 40,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  signatureImage: {
+    height: 36,
+    width: 148,
+    objectFit: "contain",
+  },
+  signatureLine: {
+    borderTop: `1 solid #3f3f46`,
+    width: "100%",
+    marginBottom: 4,
+  },
+  signatureRole: {
+    fontSize: 8,
+    color: "#52525b",
+    textAlign: "center",
+  },
+  signatureName: {
+    fontSize: 8,
+    color: "#09090b",
+    textAlign: "center",
+    marginTop: 2,
+  },
+  signatureDate: {
+    fontSize: 7.5,
+    color: "#71717a",
+    textAlign: "center",
+    marginTop: 3,
+  },
 });
 
 type Props = {
@@ -170,10 +213,24 @@ type Props = {
   locale: Locale;
 };
 
+const SIGNATURE_IMAGE_PATH = "/signature.jpg";
+
+function resolvePublicAssetUrl(path: string) {
+  if (typeof window !== "undefined" && window.location?.origin) {
+    return `${window.location.origin}${path}`;
+  }
+  return path;
+}
+
 export function ReceiptPdfDocument({ formData, locale }: Props) {
   const total = calculateTotal(formData.items);
   const pdf = getPdfStrings(locale);
   const dash = formatMessage(locale, "common.dash");
+  const signerName =
+    formData.infoType === "company" && formData.operator?.trim()
+      ? formData.operator.trim()
+      : getStoreNameForLocale(locale);
+  const signatureDateLabel = formatDateForDisplay(formData.date, locale);
 
   return (
     <Document>
@@ -296,6 +353,23 @@ export function ReceiptPdfDocument({ formData, locale }: Props) {
             </View>
           </View>
         )}
+
+        <View style={styles.signatureSection} wrap={false}>
+          <View style={styles.signatureBlock}>
+            <View style={styles.signatureSlot}>
+              <Image
+                src={resolvePublicAssetUrl(SIGNATURE_IMAGE_PATH)}
+                style={styles.signatureImage}
+              />
+            </View>
+            <View style={styles.signatureLine} />
+            <Text style={styles.signatureRole}>( {pdf.signatureAuthorized} )</Text>
+            <Text style={styles.signatureName}>{signerName}</Text>
+            <Text style={styles.signatureDate}>
+              {pdf.signatureDate} {signatureDateLabel}
+            </Text>
+          </View>
+        </View>
       </Page>
     </Document>
   );

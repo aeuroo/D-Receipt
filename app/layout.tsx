@@ -28,7 +28,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="mesh-bg min-h-full antialiased">
         <Providers>
           <AppNav />
-          <main>{children}</main>
+          <main className="pt-[max(1.75rem,env(safe-area-inset-top,0px))] pb-[calc(4.25rem+env(safe-area-inset-bottom,0px))] sm:pt-0 sm:pb-0">
+            {children}
+          </main>
         </Providers>
       </body>
     </html>
